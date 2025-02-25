@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note Taking App</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2, h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        /* Center content */
+        #auth-container, #notes-container {
+            margin: 30px auto;
+            max-width: 400px;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Auth Form Styles */
+        #auth-forms {
+            margin-top: 20px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            background-color: #f9f9f9;
+            box-sizing: border-box;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button:active {
+            background-color: #004080;
+        }
+
+        p {
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        p span {
+            color: #007bff;
+            cursor: pointer;
+        }
+
+        /* Notes Container */
+        #notes-container {
+            display: none;
+        }
+
+        nav {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        nav button {
+            background-color: #f44336;
+            width: auto;
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+
+        nav button:hover {
+            background-color: #d32f2f;
+        }
+
+        #notes-list {
+            margin-top: 20px;
+        }
+
+        .note {
+            background-color: #f9f9f9;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .note h3 {
+            margin: 0;
+            color: #333;
+        }
+
+        .note p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .note button {
+            background-color: #007bff;
+            padding: 6px 12px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .note button:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="auth-container">
+        <h2>Welcome to Note Taking App</h2>
+        <div id="auth-forms">
+            <div id="login-form">
+                <h3>Login</h3>
+                <input type="email" id="login-email" placeholder="Email" required>
+                <input type="password" id="login-password" placeholder="Password" required>
+                <button onclick="login()">Login</button>
+                <p>Don't have an account? <span id="show-register">Sign up</span></p>
+            </div>
+            <div id="register-form" style="display: none;">
+                <h3>Register</h3>
+                <input type="text" id="register-username" placeholder="Username" required>
+                <input type="email" id="register-email" placeholder="Email" required>
+                <input type="password" id="register-password" placeholder="Password" required>
+                <button onclick="register()">Register</button>
+                <p>Already have an account? <span id="show-login">Log in</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="notes-container">
+        <nav>
+            <!-- Отображение имени пользователя слева от кнопки Logout -->
+            <span id="username-display" style="font-size: 16px; font-weight: bold; margin-right: 20px;"></span>
+            <button onclick="logout()">Logout</button>
+        </nav>
+        <h2>Your Notes</h2>
+
+        <!-- Форма для создания заметки -->
+        <form id="note-form">
+            <input type="text" id="note-title" placeholder="Title" required>
+            <textarea id="note-content" placeholder="Content" required></textarea>
+            <button type="submit">Create Note</button>
+        </form>
+        
+        <!-- Поле для поиска -->
+        <div>
+            <input 
+                type="text" 
+                id="search-input" 
+                placeholder="Search notes..." 
+                onkeyup="searchNotes()" 
+                style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+
+        <!-- Список заметок -->
+        <div id="notes-list"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
